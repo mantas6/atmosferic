@@ -1,0 +1,744 @@
+.tooltip-danger > .tooltip-inner {background-color: #d33724;}
+.tooltip-danger > .tooltip-arrow { border-bottom-color:#d33724 !important; }
+
+.tooltip-success > .tooltip-inner {background-color: #008d4c;}
+.tooltip-success > .tooltip-arrow { border-bottom-color:#008d4c !important; }
+
+.slider-handle
+{
+    background-image: none;
+}
+
+.slider-selection.tick-slider-selection,
+.slider-selection,
+.slider-tick.in-selection
+{
+    background-image: none;
+}
+
+.slider-tick.in-selection,
+.slider-selection.tick-slider-selection
+{
+    background: #89cdef;
+}
+
+body, .popover, .tooltip
+{
+    font-family: 'Asap', sans-serif;
+}
+
+#map-container
+{
+    margin-bottom: 10px;
+}
+
+body
+{
+    background-color: #f5f5f5;
+}
+
+.game-container
+{
+    opacity: 0;
+}
+
+.game-load-container
+{
+    position: fixed;
+    width: 100%;
+    margin-top: 50px;
+}
+
+@keyframes loading_animation
+{
+    0%
+    {
+        color: #008d4c;
+    }
+
+    50%
+    {
+        color: #eb9316;
+    }
+
+    100%
+    {
+        color: #d33724;
+    }
+}
+
+.game-load-container .game-load-icon
+{
+    font-size: 72px;
+    animation-name: loading_animation;
+    animation-duration: 10s;
+}
+
+.game-error-container .game-load-icon
+{
+    font-size: 72px;
+    color: #d33724;
+}
+
+.game-error-container .critical-actions button
+{
+    margin-bottom: 5px;
+}
+
+.table-hover > tbody > tr:hover
+{
+    background-color: #d4ebff;
+}
+
+.bold
+{
+    font-weight: bold;
+}
+
+small.sm-label
+{
+    color: #777;
+    margin: 0 5px;
+}
+
+.map-table
+{
+    width: 100%;
+    height: 30px;
+}
+
+.map-quarter-mark
+{
+    border-bottom: 1px solid #404040;
+    border-right: 1px dotted #404040;
+    width: 20%;
+    z-index: 55;
+}
+
+.map-table > tbody > tr:first-child
+{
+    border-left: 3px solid #337ab7;
+}
+
+.map-table > tbody > tr:last-child
+{
+    border-right: 3px solid #d9534f;
+}
+
+.map-station-mark
+{
+    position: absolute;
+    margin-top: -25px;
+    width: 20px;
+    height: 20px;
+
+    z-index: 50;
+    font-size: 150%;
+
+    cursor: pointer;
+}
+
+.map-station-mark.mark-static
+{
+    cursor: auto;
+    opacity: 0.5;
+
+    z-index: 40;
+}
+
+.map-station-mark.text-success .gi
+{
+    border: 1px solid #3c763d;
+    border-radius: 14px;
+    border-bottom: none;
+}
+
+.map-station-mark.text-primary .gi
+{
+    border: 1px solid #337ab7;
+    border-radius: 14px;
+    border-bottom: none;
+}
+
+.map-station-mark.text-warning .gi
+{
+    border: 1px solid #8a6d3b;
+    border-radius: 14px;
+    border-bottom: none;
+}
+
+.map-player-mark
+{
+    position: absolute;
+    font-size: 150%;
+    margin-left: -10px;
+
+}
+
+.map-legend-container
+{
+    width: 100%;
+    height: 30px;
+}
+
+.map-legend-item
+{
+    display: inline-block;
+    border-left: 1px dotted #404040;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+.map-landing-mark
+{
+    position: absolute;
+    height: 30px;
+    margin-top: -30px;
+    background: rgba(255, 255, 80, 0.2);
+}
+
+.player-legend
+{
+    height: 10px;
+    display: inline-block;
+    border: 2px solid #337ab7;
+}
+
+.landing-range-legend
+{
+    background: rgba(255, 255, 80, 0.2);
+}
+
+.map-scale-container
+{
+    display: inline-block;
+    margin-left: 5px;
+}
+
+.map-scale-container > .slider
+{
+    width: 50px;
+}
+
+.map-region-info .name
+{
+    color: #777;
+}
+
+.map-region-info .value
+{
+    float: right;
+    margin-left: 10px;
+}
+
+.map-region-info .title
+{
+    font-weight: bold;
+    text-align: center;
+    display: block;
+}
+
+.gi.gl
+{
+    margin-right: 3px;
+}
+
+.gi.gr
+{
+    margin-left: 3px;
+}
+
+.lever-label
+{
+    margin-right: 10px;
+}
+
+.fluid-fill-amount-container
+{
+    text-align: center;
+}
+
+.fluid-fill-amount-container > .slider
+{
+    width: 80% !important;
+}
+
+.game-info-panel
+{
+    min-height: 120px;
+}
+
+.game-info-col
+{
+    padding-top: 5px;
+}
+
+.game-panel > .panel-heading
+{
+    padding: 5px 0;
+}
+
+.game-panel > .panel-body
+{
+    padding: 3px 3px;
+}
+
+.game-panel > .panel-body h2,
+.game-panel > .panel-body h4,
+.game-panel > .panel-body h3,
+.game-panel > .panel-body h5,
+.game-panel > .panel-body h6
+{
+    margin: 1px 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.game-panel.main-control-panel > .panel-body
+{
+    min-height: 55px;
+}
+
+.game-col
+{
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.control-throttle-container > .slider
+{
+    width: 90%;
+}
+
+.control-manual-container
+{
+    text-align: center;
+}
+
+.control-manual-container > .slider
+{
+    width: 90%;
+}
+
+.throttle-buttons-container
+{
+    margin-top: 5px;
+}
+
+.throttle-buttons-container button
+{
+    width: 50px;
+}
+
+.sleep-buttons-container
+{
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.sleep-buttons-container > button
+{
+    width: 50px;
+}
+
+.choose-button
+{
+    cursor: pointer;
+}
+
+.choose-button-alt
+{
+    cursor: pointer;
+}
+
+.item-icon,
+.list-row-icon
+{
+    font-size: 125%;
+}
+
+.inventory-title
+{
+    border-bottom: 1px dotted #404040;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+}
+
+.item-info-block
+{
+    margin-bottom: 10px;
+}
+
+.item-info-title
+{
+    border-bottom: 1px dotted #404040;
+}
+
+.item-info-head
+{
+    margin-bottom: 20px;
+}
+
+.table-separator
+{
+    margin: 0 5px;
+}
+
+.indicator-light
+{
+    display: inline-block;
+    background-color: #2d2d2d;
+    border-radius: 5px;
+    /*display: none;*/
+
+    padding: 1px;
+    margin: 2px 1px;
+
+    opacity: 0.8;
+}
+
+.indicator-light > i
+{
+    font-size: 200%;
+    color: #8a8a8a;
+}
+
+.indicator-light.active
+{
+    opacity: 1;
+}
+
+.indicator-light.indicator-danger.active > i
+{
+    color: #d9534f;
+}
+
+.indicator-light.indicator-warning.active > i
+{
+    color: #f0ad4e;
+}
+
+.indicator-light.indicator-success.active > i
+{
+    color: #5cb85c;
+}
+
+.indicator-light.indicator-primary.active > i
+{
+    color: #337ab7;
+}
+
+.advanced-settings-top
+{
+    margin: 5px 0;
+    display: block;
+}
+
+.advanced-settings-input-container
+{
+    margin-bottom: 5px;
+}
+
+.wakeup-approach-group
+{
+    width: 100%;
+}
+
+.wakeup-approach-group > label
+{
+    width: 25%;
+}
+
+#sleep-wakeup-collapse
+{
+    margin-top: 5px;
+}
+
+.nav.nav-tabs
+{
+    margin-bottom: 10px;
+}
+
+.margin-container
+{
+    margin: 5px 5px;
+    margin-bottom: 0;
+}
+
+.margin-container > button
+{
+    margin-bottom: 5px;
+}
+
+.save-slot-item
+{
+
+}
+
+.save-slot-item > .title
+{
+    display: inline-block;
+    width: 100px;
+}
+
+.save-slot-item > .icon-group
+{
+    display: inline-block;
+}
+
+.save-slot-item .info
+{
+    margin-right: 10px;
+}
+
+.choose-item button
+{
+    width: 100%;
+}
+
+.choose-item
+{
+    margin: 5px 0;
+}
+
+.line-through
+{
+    text-decoration: line-through;
+}
+
+.burned-indicator
+{
+    font-size: 72px;
+}
+
+.progress.speed-diff
+{
+    margin-bottom: 0;
+}
+
+.gauge-container
+{
+    text-align: center;
+}
+
+#shop-categories-list
+{
+    width: 100%;
+}
+
+#shop-categories-list > span
+{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+#shop-categories-list > button
+{
+    margin-left: 5px;
+}
+
+.after-title-container
+{
+    min-height: 25px;
+}
+
+.control-manual-container
+{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.category-show-container button
+{
+    margin-left: 5px;
+}
+
+.category-show-container .category-actions
+{
+    float: right;
+}
+
+.game-control-right
+{
+    float: right;
+}
+
+#comms-item-table .sm-label
+{
+    display: inline-block;
+}
+
+.hide-any
+{
+    display: none;
+}
+
+.game-container.game-landed .hide-landed,
+.game-container.game-passing .hide-passing,
+.game-container.game-landing .hide-landing,
+.game-container.game-space .hide-space
+{
+    display: none;
+}
+
+
+.game-container.game-landed .show-landed-block,
+.game-container.game-passing .show-passing-block,
+.game-container.game-landing .show-landing-block,
+.game-container.game-space .show-space-block
+{
+    display: block;
+}
+
+.game-container.game-landed .show-landed-inline-block,
+.game-container.game-passing .show-passing-inline-block,
+.game-container.game-landing .show-landing-inline-block,
+.game-container.game-space .show-space-inline-block
+{
+    display: inline-block;
+}
+
+.text-transmission
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    color: #3c763d;
+
+    line-height: 1.4em;
+}
+
+.game-container.tutorial-hide-inventory a[href="#inventory-tab"],
+.game-container.tutorial-hide-delivery a[href="#delivery-tab"],
+.game-container.tutorial-hide-fluid a[href="#fluid-tab"],
+.game-container.tutorial-hide-services a[href="#services-tab"],
+.game-container.tutorial-hide-comms a[href="#comms-tab"],
+.game-container.tutorial-hide-advanced a[href="#advanced-tab"],
+.game-container.tutorial-hide-map .map-container,
+.game-container.tutorial-hide-legend .map-legend-container,
+.game-container.tutorial-hide-stats .tutorial-stats,
+.game-container.tutorial-hide-indicators .tutorial-indicators,
+.game-container.tutorial-hide-gauges .tutorial-gauges,
+.game-container.tutorial-hide-physics .tutorial-physics,
+.game-container.tutorial-hide-stats a[href="#stats-tab"],
+.game-container.tutorial-hide-stats-travel .tutorial-stats-travel-preview,
+.game-container.tutorial-hide-stats-fuel .tutorial-stats-fuel-preview,
+.game-container.tutorial-hide-stats-money .tutorial-stats-money-preview,
+.game-container.tutorial-hide-stats-money .tutorial-stats-money-preview
+{
+    display: none;
+}
+
+#choose-preview-container
+{
+    pointer-events: none;
+}
+
+.game-container .game-inactive-cover
+{
+    display: none;
+}
+
+.game-container.state-inactive .game-inactive-cover
+{
+    display: block;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 1000;
+    pointer-events: none;
+
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.game-container.state-inactive.state-sleep #sleep-button
+{
+    z-index: 1005;
+}
+
+.game-container.state-inactive.state-paused .game-pause-button
+{
+    z-index: 1005;
+}
+
+.game-container .ship-control-autoland
+{
+    display: none;
+}
+
+.game-container.game-autoland .control-throttle-container
+{
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.game-container.game-autoland .ship-control-modes
+{
+    display: none;
+}
+
+.game-container.game-autoland .ship-control-autoland
+{
+    display: block;
+}
+
+.game-container.game-autoland .ship-control-autoland button
+{
+    width: 100%;
+}
+
+.ship-control-modes .afterburner-control {
+    display: none;
+}
+
+.ship-control-modes.has-afterburner .flight-control,
+.ship-control-modes.has-afterburner .afterburner-control
+{
+    float: left;
+    width: 50%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.ship-control-modes.has-afterburner .afterburner-control {
+    display: block;
+}
+
+.margin-left
+{
+    margin-left: 5px;
+}
+
+.fixed-alert
+{
+    position: fixed;
+    width: auto;
+    min-width: 250px;
+    z-index: 100;
+    margin: 10px 15px;
+    right: 0;
+}
+
+#ship-categories-list
+{
+    display: inline-block;
+}
+
+.popover.popover-tutorial .popover-close {
+    float: right;
+    margin: 5px;
+}
+
+.branch-info-label {
+    margin-top: 10px;
+}
+
+.advanced-settings-block .block-content {
+    height: 150px;
+}

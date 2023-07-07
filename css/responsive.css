@@ -1,0 +1,220 @@
+#delivery-tab .dataTables_wrapper
+{
+    overflow-y: auto;
+    width: 100%;
+}
+
+.save-slot-actions
+{
+    float: right;
+}
+
+.responsive-navigation .responsive-stats-button,
+.responsive-navigation .responsive-show,
+.responsive-delivery-switch,
+.responsive-comms-switch,
+.responsive-inventory-cats-switch,
+.responsive-inventory-shop-switch,
+.responsive-inventory-item-switch
+{
+    display: none;
+}
+
+.responsive-inventory-cats .pull-right-responsive
+{
+    float: right;
+}
+
+.responsive-inventory-item .item-buy-buttom
+{
+    display: none;
+}
+
+.responsive-delivery-container .responsive-delivery-container
+{
+    display: none;
+}
+
+@media (max-width: 768px)
+{
+    .save-slot-actions
+    {
+        float: none;
+    }
+
+    .map-region-info .value
+    {
+        display: block;
+        float: none;
+    }
+
+    .responsive-inventory-container .category-show-container .category-actions
+    {
+        float: none;
+        text-align: right;
+        margin-bottom: 5px;
+    }
+
+    #advanced-settings .advanced-settings-block .block-content
+    {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #dbdbdb;
+    }
+
+    .ship-control-modes.has-afterburner .flight-control,
+    .ship-control-modes.has-afterburner .afterburner-control {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+}
+
+@media (max-width: 992px)
+{
+    .save-slot-actions
+    {
+        float: none;
+    }
+
+    .save-slot-item > .title
+    {
+        width: auto;
+    }
+
+    .save-slot-item .info
+    {
+        float: right;
+    }
+
+    .game-control-right
+    {
+        float: left;
+        margin-top: 5px;
+    }
+
+    .responsive-navigation li
+    {
+        width: 100%;
+
+        display: none;
+    }
+
+    .responsive-navigation .responsive-show
+    {
+        display: block;
+    }
+
+    .responsive-navigation.active li
+    {
+        display: block;
+    }
+
+    .responsive-navigation.active .responsive-stats-button
+    {
+        display: block;
+    }
+
+    .responsive-menu-button
+    {
+        display: inline-block;
+    }
+
+    #map-container
+    {
+        margin-top: 10px;
+    }
+
+    .responsive-inventory-cats-switch,
+    .responsive-inventory-shop-switch,
+    .responsive-inventory-item-switch,
+    .responsive-comms-switch
+    {
+        display: inline-block;
+    }
+
+    .responsive-comms-clickable
+    {
+        cursor: pointer;
+
+        color: #337ab7;
+    }
+
+    .responsive-comms-container .responsive-comms-item
+    {
+        display: none;
+    }
+
+    .responsive-comms-container.responsive-comms-active .responsive-comms-item
+    {
+        display: block;
+    }
+
+    .responsive-comms-container.responsive-comms-active .responsive-comms-list
+    {
+        display: none;
+    }
+
+    .responsive-inventory-container .responsive-inventory-item,
+    .responsive-inventory-container .responsive-inventory-shop
+    {
+        display: none;
+    }
+
+    .responsive-inventory-container.responsive-inventory-item-active .responsive-inventory-item
+    {
+        display: block;
+    }
+
+    .responsive-inventory-container.responsive-inventory-item-active .responsive-inventory-cats
+    {
+        display: none;
+    }
+
+    .responsive-inventory-container.responsive-inventory-shop-active .responsive-inventory-shop
+    {
+        display: block;
+    }
+
+    .responsive-inventory-container.responsive-inventory-shop-active .responsive-inventory-cats
+    {
+        display: none;
+    }
+
+    .responsive-inventory-cats .pull-right-responsive
+    {
+        float: none;
+        margin-left: 5px;
+    }
+
+    .responsive-inventory-item .item-buy-buttom
+    {
+        display: inline-block;
+    }
+}
+
+@media (max-width: 1200px)
+{
+    .responsive-delivery-switch
+    {
+        display: inline-block;
+    }
+
+    .responsive-delivery-container .responsive-delivery-station
+    {
+        display: none;
+    }
+
+    .responsive-delivery-container.responsive-delivery-active .responsive-delivery-station
+    {
+        display: block;
+    }
+
+    .responsive-delivery-container.responsive-delivery-active .responsive-delivery-ship
+    {
+        display: none;
+    }
+
+    .responsive-delivery-container .responsive-delivery-container
+    {
+        display: block;
+    }
+}

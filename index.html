@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Atmosferic</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://m.7777.lt/a_sites_auto.js"></script>
+
+	<link href="https://fonts.googleapis.com/css?family=Asap|Faster+One" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/css/bootstrap-slider.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/plug-ins/1.10.15/integration/bootstrap/3/dataTables.bootstrap.css">
+	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+
+	<link href="icons.css" rel="stylesheet" />
+	<link href="css/style.css?v=version20" rel="stylesheet" />
+	<link href="css/responsive.css?v=version20" rel="stylesheet" />
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-113520697-1"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-113520697-1');
+	</script>
+</head>
+<body>
+	<div class="game-load-container text-center">
+		<div class="">
+			<i class="game-load-icon gi gi-rocket"></i>
+		</div>
+		<p class="game-load-text">...</p>
+	</div>
+	<script src="js/load.js"></script>
+	<div class="game-error-container text-center hidden">
+		<div class="">
+			<i class="game-load-icon gi gi-cracked-alien-skull"></i>
+		</div>
+		<p data-lang="settings.critical_error"></p>
+		<p class="text-muted message">
+		</p>
+		<div class="critical-actions">
+			<button class="btn btn-primary game-load-button">
+				<i class="gi gi-save"></i>
+				<span data-lang="settings.critical_load"></span>
+			</button>
+			<button class="btn btn-danger game-reset-button">
+				<i class="gi gi-clockwise-rotation"></i>
+				<span data-lang="settings.critical_reset"></span>
+			</button>
+		</div>
+	</div>
+	<div id="game-container" class="game-container">
+		<div class="game-inactive-cover"></div>
+		<div class="container-fluid">
+			<div class="row responsive-stats-container tutorial-stats">
+				<div class="col-md-2 col-sm-6 col-xs-12 game-info-col">
+					<div class="panel panel-default game-panel game-info-panel tutorial-speed-preview">
+						<div class="panel-heading">
+							<h3 class="panel-title text-center" data-lang="game.travelling"></h3>
+						</div>
+						<div class="panel-body text-center">
+							<h6 data-lang="game.speed"></h6>
+							<h2 class="game-speed-label"></h2>
+							<h6 data-lang="game.speed_diff_label"></h6>
+							<div class="progress speed-diff">
+								<div id="speed-diff-progress" class="progress-bar" style="width: 0%"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 game-info-col">
+					<div class="panel panel-default game-panel game-info-panel tutorial-stats-travel-preview">
+						<div class="panel-heading">
+							<h4 class="panel-title text-center" id="map-travel-state-label"></h4>
+						</div>
+						<div class="panel-body text-center">
+							<h6 class="hide-landed" data-lang="map.approaching"></h6>
+
+							<h4><span id="map-station-name-label"></span></h4>
+
+							<h6 class="hide-landed" data-lang="map.approaching_in"></h6>
+							<h4 class="hide-landed">
+								<span id="map-next-station-label"></span>
+							</h4>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-6 col-xs-12 game-info-col">
+					<div class="panel panel-default game-panel game-info-panel tutorial-stats-fuel-preview">
+						<div class="panel-heading">
+							<h4 class="panel-title text-center" data-lang="game.fuel"></h4>
+						</div>
+						<div class="panel-body text-center">
+							<div class="row">
+								<div class="col-xs-12 col-md-6">
+									<h6 data-lang="game.fuel_left_distance"></h6>
+									<h4><span id="game-fuel-distance-current-label"></span></h4>
+								</div>
+								<div class="col-xs-12 col-md-6">
+									<h6 data-lang="game.fuel_left_distance_avg"></h6>
+									<h4><span id="game-fuel-distance-label"></span></h4>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-12 col-md-6">
+									<h6 data-lang="game.fuel_left_time"></h6>
+									<h4><span id="game-fuel-time-label"></span></h4>
+								</div>
+								<div class="col-xs-12 col-md-6">
+									<h6 data-lang="game.fuel_left"></h6>
+									<h4><span id="game-fuel-left-label"></span></h4>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-6 col-xs-12 game-info-col">
+					<div class="panel panel-default game-panel game-info-panel tutorial-stats-money-preview">
+						<div class="panel-heading">
+							<h4 class="panel-title text-center" data-lang="game.finances"></h4>
+						</div>
+						<div class="panel-body text-center">
+							<h4>
+								<label class="game-money-label"></label>
+								<i class="gi gi-money-stack"></i>
+							</h4>
+							<h6 class="text-muted">
+								<span class="text-primary">
+									<span class="debt-amount-label">0</span><i class="gi gr gi-expense"></i>
+								</span>
+								<span class="">
+									<span class="taxes-amount-label">0</span><i class="gi gr gi-tied-scroll"></i>
+								</span>
+							</h6>
+							<div class="last-cost-container hidden">
+								<h6 id="game-last-cost-title"></h6>
+								<h4><span id="game-last-cost"></span></h4>
+							</div>
+							</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 game-info-col">
+					<div class="panel panel-default game-panel game-info-panel">
+						<div class="panel-heading">
+							<h4 class="panel-title text-center" data-lang="comms.communications"></h4>
+						</div>
+						<div class="panel-body text-center">
+							<h5 id="comms-status-label" data-lang="comms.indicator.no_new"></h5>
+							<div class="comms-indicator-container hidden">
+								<h4><i id="comms-title-icon"></i><span  id="comms-title-label"></span></h4>
+								<h5 id="comms-item-label" class="text-muted"></h5>
+								<span id="comms-show-button" class="choose-button text-primary"><i class="gl gi gi-radar-dish"></i><span data-lang="comms.indicator.show_indicated"></span></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<div id="map-container" class="map-container">
+						<table class="map-table">
+							<tr>
+								<td class="map-quarter-mark"></td>
+								<td class="map-quarter-mark"></td>
+								<td class="map-quarter-mark"></td>
+								<td class="map-quarter-mark"></td>
+								<td class="map-quarter-mark"></td>
+							</tr>
+						</table>
+						<div class="map-landing-mark">
+
+						</div>
+						<div class="map-station-mark template hidden" data-toggle="tooltip">
+							<i class="gi"></i>
+						</div>
+					</div>
+					<div class="map-legend-container">
+						<div class="pull-left">
+							<div class="map-legend-item">
+								<div class="player-legend"></div>
+								<span id="game-distance-label"></span>
+							</div>
+							<div class="map-legend-item hidden-xs">
+								<div class="landing-range-legend">
+									<span id="map-landing-range-label"></span>
+								</div>
+							</div>
+							<div class="map-legend-item">
+								<i class="gi gi-wooden-crate text-primary"></i>
+								<span id="game-next-delivery-label"></span>
+							</div>
+							<div class="map-legend-item tutorial-autolanding-preview">
+								<i class="gi gi-rocket text-success"></i>
+								<span id="game-next-autoland-label"></span>
+							</div>
+							<div class="map-legend-item">
+								<i class="gi gi-radar-dish text-warning"></i>
+								<span id="game-next-comm-label"></span>
+							</div>
+							<div class="map-legend-item hidden-xs">
+								<i class="gi gi-defense-satellite"></i>
+								<span data-lang="map.station"></span>
+							</div>
+							<div class="map-legend-item hidden-xs">
+								<i class="gi gi-arrow-cursor"></i>
+								<span data-lang="map.click_to_autoland"></span>
+							</div>
+						</div>
+						<div class="game-control-right">
+							<div class="btn-group">
+								<button id="sleep-button" type="button" class="btn btn-default btn-xs"><i class="gi gl gi-alarm-clock"></i><span data-lang="sleep.sleep"></span></button>
+							</div>
+							<div class="map-scale-container">
+								<span id="map-scale-label" class="hidden-xs"></span>
+								<span data-lang="map.per_div" class="hidden-xs"></span>
+								<label class="lever-label"><i class="gl gi gi-magnifying-glass"></i><span class="hidden-xs" data-lang="map.scale"></span></label>
+								<input id="map-scale-input">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs responsive-navigation" role="tablist">
+						<li role="presentation" class="responsive-show">
+							<a href="#" class="responsive-menu-button">
+								<i class="gl gi gi-stack"></i>
+								<span data-lang="game.menu"></span>
+								<span class="pull-right">
+									<span class="gi gr gi-money-stack"></span>
+									<span class="game-money-label"></span>
+								</span>
+								<span class="pull-right">
+									<span class="gi gi-speedometer"></span>
+									<span class="game-speed-label"></span>
+								</span>
+							</a>
+						</li>
+						<li role="presentation"><a href="#stats-tab" class="responsive-stats-button" data-toggle="tab"><i class="gl gi gi-pie-chart"></i><span data-lang="game.stats"></span></a></li>
+						<li role="presentation" class="active"><a href="#control-tab" data-toggle="tab"><i class="gl gi gi-glider"></i><span class="" data-lang="control.control"></span></a></li>
+						<li role="presentation" class=""><a href="#inventory-tab" data-toggle="tab"><i class="gl gi gi-backpack"></i><span class="" data-lang="inventory.inventory"></span><i data-name="inventory" class="gi gi-pin gr text-danger hidden pin-indicator"></i></a></li>
+						<li role="presentation" class=""><a href="#delivery-tab" data-toggle="tab"><i class="gl gi gi-wooden-crate"></i><span class="" data-lang="delivery.delivery"></span><i data-name="delivery" class="gi gi-pin gr text-danger hidden pin-indicator"></i></a></li>
+						<li role="presentation" class=""><a href="#fluid-tab"><i class="gl gi gi-gas-pump"></i><span class="" data-lang="fluid.fluid"></span><i data-name="fluid" class="gi gi-pin gr text-danger hidden pin-indicator"></i></a></li>
+						<li role="presentation" class=""><a href="#services-tab" data-toggle="tab"><i class="gl gi gi-lighthouse"></i><span class="" data-lang="services.services"></span></a></li>
+						<li role="presentation" class=""><a href="#comms-tab" data-toggle="tab"><i class="gl gi gi-radar-dish"></i><span class="" data-lang="comms.comms"></span><i data-name="comms" class="gi gi-pin gr text-danger hidden pin-indicator"></i></a></li>
+						<li role="presentation" class=""><a href="#advanced-tab" data-toggle="tab"><i class="gl gi gi-spanner"></i><span class="" data-lang="control.advanced"></span></a></li>
+						<li role="presentation" class="pull-right"><a href="#settings-tab" data-toggle="tab"><i class="gl gi gi-auto-repair"></i><span class="" data-lang="game.settings"></span></a></li>
+						<li class="pull-right"><a href="#" class="game-pause-button text-muted"><i class="gl gi gi-halt"></i><span class="" data-lang="settings.paused"></span></a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div role="tabpanel" class="tab-pane" id="stats-tab">
+						</div>
+						<div role="tabpanel" class="tab-pane responsive-inventory-container" id="inventory-tab">
+							<div class="row">
+								<div class="col-xs-12 col-md-3 responsive-inventory-cats">
+									<h4 class="inventory-title text-center" data-lang="inventory.ship"></h4>
+									<div class="after-title-container">
+										<span class=""><span id="ship-weight-label"></span><i class="gi gr gi-weight"></i></span>
+										<span class="margin-left"><span id="ship-drag-label"></span><i class="gi gr gi-wind-slap"></i></span>
+										<div id="ship-categories-list" class="margin-left">
+											<span class="ship-category-show choose-button-alt text-primary template hidden">
+												<i class="icon"></i>
+												<span class="amount"></span>
+											</span>
+										</div>
+										<div class="pull-right">
+											<button type="button" class="btn btn-sm btn-default responsive-inventory-shop-switch show-all"><i class="gi gl gi-shopping-cart"></i><span data-lang="inventory.shop_show"></span></button>
+											<button id="inventory-repair-all-button" class="btn btn-sm btn-success pull-right margin-left hidden"><i class="gi gl gi-tinker"></i><span data-lang="inventory.repair.repair_all.action"></span></button>
+										</div>
+									</div>
+									<table id="categories-table" class="table table-hover" style="width: 100%;"></table>
+								</div>
+								<div class="col-xs-12 col-md-4 responsive-inventory-item">
+									<h4 class="inventory-title text-center" data-lang="inventory.info"></h4>
+									<div class="after-title-container">
+										<button type="button" class="btn btn-sm btn-default pull-left responsive-inventory-cats-switch"><i class="gi gl gi-backpack"></i><span data-lang="inventory.cats_show_item"></span></button>
+										<button type="button" class="btn btn-sm btn-default pull-right responsive-inventory-shop-switch"><i class="gi gl gi-shopping-cart"></i><span data-lang="inventory.shop_show_item"></span></button>
+									</div>
+									<div id="item-info-container">
+										<div class="item-info-block template hidden">
+											<div class="item-info-title">
+												<span><i class="icon gi gl"></i><span class="title"></span></span>
+												<div class="pull-right">
+													<span class="value-rel"></span>
+													<span class="value text-primary"></span>
+												</div>
+											</div>
+											<span class="description text-muted"></span>
+										</div>
+										<div class="item-info-head">
+											<h4>
+												<i class="item-icon"></i>
+												<span class="item-name"></span>
+												<i class="gi gi-info text-primary visible-xs-inline-block cat-info hidden"></i>
+												<i class="item-unique gi gi-round-star text-warning hidden"></i>
+											</h4>
+											<p class="item-description"></p>
+											<p class="text-muted hidden-xs category-description"></p>
+										</div>
+									</div>
+									<button type="button" class="btn btn-sm btn-primary item-buy-buttom"><i class="gi gl gi-shopping-cart"></i><span data-lang="inventory.buy_for"></span> <span class="price"></span></button>
+								</div>
+								<div class="col-xs-12 col-md-5 responsive-inventory-shop">
+									<h4 class="inventory-title text-center" data-lang="inventory.shop"></h4>
+									<div class="after-title-container category-show-container">
+										<div class="category-actions">
+											<button id="shop-show-unique-button" class="btn btn-warning btn-sm hidden"><i class="gi gl gi-round-star"></i><span data-lang="inventory.show_unique"></span></button>
+											<button id="shop-show-all-button" class="btn btn-default btn-sm hide-any show-landed-inline-block" data-lang="inventory.show_all"></button>
+											<button type="button" class="btn btn-sm btn-default responsive-inventory-cats-switch"><i class="gi gl gi-backpack"></i><span data-lang="inventory.cats_show"></span></button>
+										</div>
+										<div id="shop-categories-list">
+											<span class="shop-category-show choose-button-alt text-primary template hidden">
+												<i class="icon"></i>
+												<span class="amount"></span>
+											</span>
+										</div>
+									</div>
+									<div class="hide-any show-landed-block">
+										<table id="shop-table" class="table table-hover" style="width: 100%;"></table>
+									</div>
+									<div class="panel panel-default hide-landed">
+										<div class="panel-body">
+											<span class="text-muted" data-lang="inventory.shop_explain"></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane active" id="control-tab">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6 col-md-6">
+									<div class="panel panel-default game-panel game-control-panel text-center tutorial-throttle-preview">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center">
+												<i class="gl gi gi-syringe"></i>
+												<span data-lang="control.throttle"></span>
+											</h3>
+										</div>
+										<div class="panel-body">
+											<div class="control-throttle-container">
+												<input id="control-throttle-input">
+												<div class="throttle-buttons-container">
+													<div class="pull-left">
+														<button class="btn btn-default btn-xs throttle-none-button" data-lang="game.throttle_none"></button>
+														<button class="btn btn-default btn-xs throttle-minus-button">-</button>
+														<button class="btn btn-default btn-xs throttle-idle-button" data-lang="game.throttle_idle"></button>
+													</div>
+													<div class="pull-right">
+														<button class="btn btn-primary btn-xs throttle-plus-button">+</button>
+														<button class="btn btn-primary btn-xs throttle-full-button" data-lang="game.throttle_full"></button>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6">
+									<div class="panel panel-default game-panel game-control-panel main-control-panel tutorial-control-preview">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center">
+												<i class="gl gi gi-lever"></i>
+												<span data-lang="control.control"></span>
+											</h3>
+										</div>
+										<div class="panel-body">
+											<div class="game-info-col">
+												<div class="ship-control-modes">
+													<div class="flight-control">
+														<input type="checkbox" id="control-auto-input">
+													</div>
+													<div class="afterburner-control">
+														<input type="checkbox" id="control-afterburner-input">
+													</div>
+												</div>
+												<div class="ship-control-autoland">
+													<button class="btn btn-default"><i class="gi gl gi-halt"></i><span data-lang="map.cancel_autoland"></span></button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 tutorial-gauges">
+									<div class="panel panel-default game-panel game-control-panel">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center">
+												<i class="gl gi gi-speedometer"></i>
+												<span data-lang="control.gauges"></span>
+											</h3>
+										</div>
+										<div class="panel-body gauge-container">
+											<canvas id="temp-gauge"></canvas>
+											<canvas id="fuel-gauge"></canvas>
+											<canvas id="airflow-gauge"></canvas>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6 tutorial-indicators">
+									<div class="panel panel-default game-panel game-control-panel">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center">
+												<i class="gl gi gi-led"></i>
+												<span data-lang="indicator.indicators"></span>
+											</h3>
+										</div>
+										<div class="panel-body text-center">
+											<div class="indicator-light indicator-warning indicator-ns-fuel">
+												<i class="gi gi-gas-pump"></i>
+											</div>
+											<div class="indicator-light indicator-danger indicator-ns-unburnt">
+												<i class="gi gi-bottle-vapors"></i>
+											</div>
+											<div class="indicator-light indicator-danger indicator-ns-thermal">
+												<i class="gi gi-thermometer-hot"></i>
+											</div>
+											<div class="indicator-light indicator-success indicator-ns-autoland">
+												<i class="gi gi-rocket"></i>
+											</div>
+											<div class="indicator-light indicator-danger indicator-ns-autoland_warn">
+												<i class="gi gi-rocket"></i>
+											</div>
+											<div class="indicator-light indicator-primary indicator-ns-starter">
+												<i class="gi gi-spinning-top"></i>
+											</div>
+											<div class="indicator-light indicator-danger indicator-ns-exhaust">
+												<i class="gi gi-rocket-flight"></i>
+											</div>
+											<div class="indicator-light indicator-warning indicator-ns-service_warning">
+												<i class="gi gi-tinker"></i>
+											</div>
+											<div class="indicator-light indicator-danger indicator-ns-service_danger">
+												<i class="gi gi-siren"></i>
+											</div>
+											<div class="indicator-light indicator-primary indicator-ns-cooling_fan">
+												<i class="gi gi-twirly-flower"></i>
+											</div>
+											<div class="indicator-light indicator-warning indicator-ns-heater">
+												<i class="gi gi-light-bulb"></i>
+											</div>
+											<div class="indicator-light indicator-warning indicator-ns-cooling_water">
+												<i class="gi gi-scuba-tanks"></i>
+											</div>
+											<div class="indicator-light indicator-warning indicator-ns-filter_fuel">
+												<i class="gi gi-chemical-tank"></i>
+											</div>
+											<div class="indicator-light indicator-warning indicator-ns-filter_intake">
+												<i class="gi gi-virtual-marker"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-6 tutorial-physics">
+									<div class="panel panel-default game-panel game-control-panel">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center">
+												<i class="gl gi gi-pie-chart"></i>
+												<span data-lang="indicator.stats"></span>
+											</h3>
+										</div>
+										<div class="panel-body">
+											<div id="physics-stats"class="row">
+												<div class="col-xs-6 col-md-3 text-center stats-block template hidden" data-toggle="popover">
+													<i class="gi gr icon"></i>
+													<span class="text"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<p id="game-physics-debug" class="text-small">
+
+							</p>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="advanced-tab">
+							<div class="advanced-settings-top text-right">
+								<button id="advanced-settings-reset" type="button" class="btn btn-primary" data-lang="advanced_settings.reset_defaults"></button>
+							</div>
+							<div class="row">
+								<div id="advanced-settings">
+									<div class="col-xs-12 col-sm-6 col-md-3 advanced-settings-block template hidden">
+										<div class="block-content">
+											<label><i class="gi gl gi-button-finger"></i><span class="name"></span></label>
+											<div class="input-container advanced-settings-input-container">
+
+											</div>
+											<p><i class="gi gl gi-open-book"></i><span class="description"></span></p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane responsive-delivery-container" id="delivery-tab">
+							<div class="col-xs-12 col-lg-6 responsive-delivery-ship">
+								<h4 class="inventory-title text-center">
+									<span data-lang="delivery.carrying"></span>
+								</h4>
+								<div class="after-title-container">
+									<button type="button" class="btn btn-sm btn-default responsive-delivery-switch"><i class="gi gl gi-defense-satellite"></i><span data-lang="delivery.station"></span></button>
+									<div class="pull-right">
+										<small class="label delivery-capacity-label tutorial-delivery-capacity-preview"></small>
+										<i class="gi gr gi-weight"></i>
+									</div>
+								</div>
+								<div class="player-delivery-container">
+									<table id="player-delivery-table" class="table table-condensed table-hover" style="width: 100%;"></table>
+								</div>
+								<div class="player-delivery-empty hidden panel panel-default">
+									<div class="panel-body">
+										<span class="text-muted" data-lang="delivery.delivery_explain"></span>
+									</div>
+								</div>
+							</div>
+							<div class="col-xs-12 col-lg-6 responsive-delivery-station tutorial-delivery-station-preview">
+								<h4 class="inventory-title text-center">
+									<span data-lang="delivery.available"></span>
+								</h4>
+								<div class="after-title-container">
+									<button type="button" class="btn btn-sm btn-default responsive-delivery-switch"><i class="gi gl gi-wooden-crate"></i><span data-lang="delivery.ship"></span></button>
+									<div class="pull-right responsive-delivery-container">
+										<small class="label delivery-capacity-label"></small>
+										<i class="gi gr gi-weight"></i>
+									</div>
+								</div>
+								<div class="hide-any show-landed-block">
+									<table id="station-delivery-table" class="table table-condensed table-hover" style="width: 100%;"></table>
+								</div>
+								<div class="panel panel-default hide-landed">
+									<div class="panel-body">
+										<span class="text-muted" data-lang="delivery.delivery_station_explain"></span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane responsive-comms-container" id="comms-tab">
+							<div class="row">
+								<div class="col-xs-12 col-md-3 responsive-comms-list">
+									<h4 class="inventory-title text-center" data-lang="comms.groups_title"></h4>
+									<div class="after-title-container">
+										<button id="comms-completed-button" class="btn btn-default btn-sm pull-right" data-enabled="false" data-lang="comms.show_completed"></button>
+									</div>
+									<table id="comms-table" class="table table-hover" style="width: 100%;"></table>
+								</div>
+								<div class="col-xs-12 col-md-9 responsive-comms-item">
+									<h4 class="inventory-title text-center" data-lang="comms.group_item_title"></h4>
+									<div class="after-title-container">
+										<button type="button" class="btn btn-sm btn-default pull-left responsive-comms-switch"><i class="gi gl gi-radar-dish"></i><span data-lang="comms.list"></span></button>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 comm-info-container">
+											<div class="comm-info-head">
+												<h4><i class="comm-icon"></i><span class="comm-name"></span></h4>
+												<p class="comm-description text-info"></p>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<table id="comms-item-table" class="table table-hover" style="width: 100%;"></table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="settings-tab">
+							<div class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-2 control-label" data-lang="settings.title"></label>
+									<div class="col-sm-10">
+										<p id="game-title-label" class="form-control-static">Atmosferic</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" data-lang="settings.version"></label>
+									<div class="col-sm-10">
+										<p id="game-version-label" class="form-control-static"></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" data-lang="settings.branch"></label>
+									<div class="col-sm-2">
+										<select id="game-branch-select" class="form-control">
+											<option value="stable" data-lang="settings.branches.stable"></option>
+											<option value="unstable" data-lang="settings.branches.unstable"></option>
+										</select>
+									</div>
+									<div class="col-sm-12">
+										<div class="col-sm-2">
+
+										</div>
+										<div class="col-sm-10">
+											<p class="text-muted branch-info-label">* Unstable branch might contain newer features. Save games are separate between branches</p>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">Changelog</label>
+									<div class="col-sm-10">
+										<p class="form-control-static">
+											<a href="/changelog.html" target="_blank">Visit here</a>
+										</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" data-lang="settings.created_by"></label>
+									<div class="col-sm-10">
+										<p class="form-control-static">Mantas Pauliukonis</p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" data-lang="settings.game"></label>
+									<div class="col-sm-10">
+										<button class="btn btn-danger game-reset-button">
+											<i class="gi gi-clockwise-rotation"></i>
+											<span class="hidden-xs" data-lang="settings.reset"></span>
+										</button>
+										<button class="btn btn-warning game-pause-button">
+											<i class="gi gi-halt"></i>
+											<span data-lang="settings.pause"></span>
+										</button>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label" data-lang="stats.stats"></label>
+									<div class="col-sm-10">
+										<button id="stats-show-button" class="btn btn-primary">
+											<i class="gi gi-rolled-cloth"></i>
+											<span class="hidden-xs" data-lang="stats.show_stats"></span>
+										</button>
+									</div>
+								</div>
+								<label class="saving-unavailable-label text-danger hidden"><i class="gi gl gr gi-compact-disc"></i><span data-lang="game.save_not_available"></span></label>
+								<div class="form-group">
+									<ul id="save-slot-container" class="list-group">
+										<li class="list-group-item save-slot-item template hidden">
+											<h4 class="title"></h4>
+											<div class="icon-group hidden-empty hidden">
+												<span class="text-success">
+													<span class="distance"></span>
+													<i class="gi gi-speedometer"></i>
+												</span>
+												<span class="text-primary">
+													<span class="money"></span>
+													<i class="gi gi-money-stack"></i>
+												</span>
+												<span class="text-warning">
+													<span class="time"></span>
+													<i class="gi gi-backward-time"></i>
+												</span>
+											</div>
+											<label class="empty-slot text-danger" data-lang="game.empty_slot"></label>
+											<div class="save-slot-actions">
+												<span class="info text-muted"></span>
+												<button class="btn btn-danger slot-delete hidden-empty hidden">
+													<i class="gi gi-trash-can"></i>
+													<span class="hidden-xs" data-lang="settings.delete_slot"></span>
+												</button>
+												<button class="btn btn-success slot-save">
+													<i class="gi gi-save"></i>
+													<span class="hidden-xs" data-lang="settings.save_slot"></span>
+												</button>
+												<button class="btn btn-primary slot-load">
+													<i class="gi gi-save"></i>
+													<span class="hidden-xs" data-lang="settings.load_slot"></span>
+												</button>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div role="tabpanel" class="tab-pane" id="services-tab">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6 col-md-4">
+									<div class="panel panel-default game-panel game-control-panel text-center">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center"><i class="gi gl gi-expense"></i><span data-lang="services.loans.loans"></span></h3>
+										</div>
+										<div class="panel-body">
+											<h3><span class="debt-amount-label">0</span><i class="gi gr gi-money-stack"></i></h3>
+											<div id="loan-take-container" class="hidden">
+												<small data-lang="services.loans.take_debt"></small>
+												<div class="">
+													<span class="text-primary">
+														<span data-lang="services.loans.interest"></span>
+														<span id="loan-interest-label"></span>
+														<span>%</span>
+													</span>
+												</div>
+												<div class="margin-container">
+													<button class="btn btn-warning service-take-loan" data-amount="25">
+														<span>25</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+													<button class="btn btn-warning service-take-loan" data-amount="50">
+														<span>50</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+													<button class="btn btn-warning service-take-loan" data-amount="75">
+														<span>75</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+													<button class="btn btn-warning service-take-loan" data-amount="100">
+														<span>100</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+												</div>
+												<div class="">
+													<button id="loan-pay-button" class="btn btn-danger hidden">
+														<small data-lang="services.loans.pay_all"></small>
+														<span></span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+												</div>
+											</div>
+											<small data-lang="services.loans.return_info"></small>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-4">
+									<div class="panel panel-default game-panel game-control-panel text-center">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center"><i class="gi gl gi-tied-scroll"></i><span data-lang="services.taxes.taxes"></span></h3>
+										</div>
+										<div class="panel-body">
+											<h3>
+												<span class="taxes-amount-label">0</span><i class="gi gr gi-money-stack"></i>
+												<small class="taxes-limit-info">
+													<span>/</span>
+													<span class="taxes-limit-label"></span><i class="gi gr gi-money-stack"></i>
+												</small>
+											</h3>
+											<div id="taxes-pay-container" class="hidden">
+												<small data-lang="services.taxes.pay"></small>
+												<div class="margin-container">
+													<button class="btn btn-success service-pay-tax" data-amount="25">
+														<span>25</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+													<button class="btn btn-success service-pay-tax" data-amount="50">
+														<span>50</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+													<button class="btn btn-success service-pay-tax" data-amount="75">
+														<span>75</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+													<button class="btn btn-success service-pay-tax" data-amount="100">
+														<span>100</span>
+														<i class="gi gr gi-money-stack"></i>
+													</button>
+												</div>
+											</div>
+											<small data-lang="services.taxes.info"></small>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-sm-6 col-md-4">
+									<div class="panel panel-default game-panel game-control-panel text-center">
+										<div class="panel-heading">
+											<h3 class="panel-title text-center"><i class="gi gl gi-crane"></i><span data-lang="services.recovery.title"></span></h3>
+										</div>
+										<div class="panel-body">
+											<small data-lang="services.recovery.info"></small>
+											<div class="">
+												<button id="recovery-recover-button" class="btn btn-danger">
+													<small data-lang="services.recovery.recover"></small>
+													<span></span>
+													<i class="gi gr gi-money-stack"></i>
+												</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="choose-modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">
+							<span class="gi gi-radar-dish"></span>
+							<span id="choose-title-label"></span>
+						</h4>
+					</div>
+					<div class="modal-body">
+						<p id="choose-body-text"></p>
+						<div id="choose-items-container" class="row">
+							<div class="choose-item template hidden col-xs-12">
+								<button type="button" class="btn btn-default choose-dialog-button" data-dismiss="modal" data-choose=""></button>
+							</div>
+						</div>
+						<div id="choose-preview-container">
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<span class="gi gi-cancel"></span>
+							<span data-lang="game.close"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="stats-modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">
+							<span class="gi gi-rolled-cloth"></span>
+							<span data-lang="stats.stats"></span>
+						</h4>
+					</div>
+					<div class="modal-body">
+						<table id="stats-table" class="table table-hover table-condensed" style="width: 100%;"></table>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<span class="gi gi-cancel"></span>
+							<span data-lang="game.close"></span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="fluid_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title"><i class="gl gi gi-gas-pump"></i><span data-lang="fluid.title"></span></h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-horizontal">
+							<div class="form-group">
+								<label class="col-sm-4 control-label" data-lang="fluid.cost"></label>
+								<div class="col-sm-8">
+									<p class="form-control-static">
+										<span id="fluid-cost-label"></span>
+										<i class="gi gi-money-stack"></i>
+									</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" data-lang="fluid.cost_amount"></label>
+								<div class="col-sm-8">
+									<p class="form-control-static">
+										<span id="fluid-cost-amount-label"></span>
+										<i class="gi gi-money-stack"></i>
+									</p>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label" data-lang="fluid.amount_fill"></label>
+								<div class="col-sm-8">
+									<p class="form-control-static">
+										<span id="fluid-amount-fill-label"></span>
+										<i class="gi gi-oil-drum"></i>
+									</p>
+								</div>
+							</div>
+						</div>
+						<div class="">
+							<b data-lang="fluid.source"></b>
+							<select id="fluid-cat-select" style="width: 100%;"></select>
+						</div>
+						<p></p>
+						<b data-lang="fluid.amount"></b>
+						<div class="fluid-fill-amount-container">
+							<input id="fluid-amount-input" type="number" style="width: 100%;"></input>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							<i class="gi gi-cancel"></i>
+							<span data-lang="game.close"></span>
+						</button>
+						<button id="fluid-flow-button" type="button" class="btn btn-primary">
+							<i class="gi gi-drop"></i>
+							<span data-lang="fluid.flow"></span>
+							<span> (</span>
+							<span id="fluid-cost-amount-button-label"></span>
+							<i class="gi gi-money-stack"></i>
+							<span>)</span>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="dialog-modal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">
+						<span class="gi gi-help"></span>
+						<span id="dialog-title-label"></span>
+					</h4>
+				</div>
+				<div class="modal-body">
+					<p id="dialog-body-text"></p>
+				</div>
+				<div class="modal-footer">
+					<button id="dialog-confirm-button" type="button" class="btn btn-primary" data-dismiss="modal">
+						<span class="gi gi-arrow-cursor"></span>
+						<span data-lang="game.ok"></span>
+					</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">
+						<span class="gi gi-cancel"></span>
+						<span data-lang="game.cancel"></span>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/plug-ins/1.10.15/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.min.js"></script>
+	<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+	<script src="https://cdn.rawgit.com/Mikhus/canvas-gauges/gh-pages/download/2.1.4/all/gauge.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-duration-format/1.3.0/moment-duration-format.min.js"></script>
+
+	<script src="js/init.js?v=version20"></script>
+
+	<script src="js/lang/en.js?v=version20"></script>
+	<script src="js/lang.js?v=version20"></script>
+
+	<script src="js/general.js?v=version20"></script>
+	<script src="js/clock.js?v=version20"></script>
+
+	<script src="js/config/categories.js?v=version20"></script>
+	<script src="js/config/comms.js?v=version20"></script>
+	<script src="js/config/deliveries.js?v=version20"></script>
+	<script src="js/config/other.js?v=version20"></script>
+	<script src="js/config/places.js?v=version20"></script>
+	<script src="js/config/upgrades.js?v=version20"></script>
+	<script src="js/game.js?v=version20"></script>
+	<script src="js/stats.js?v=version20"></script>
+	<script src="js/fluid.js?v=version20"></script>
+	<script src="js/delivery.js?v=version20"></script>
+	<script src="js/services.js?v=version20"></script>
+	<script src="js/map.js?v=version20"></script>
+	<script src="js/region.js?v=version20"></script>
+	<script src="js/indicators.js?v=version20"></script>
+	<script src="js/inventory.js?v=version20"></script>
+	<script src="js/control.js?v=version20"></script>
+	<script src="js/comm.js?v=version20"></script>
+	<script src="js/physics.js?v=version20"></script>
+	<script src="js/saving.js?v=version20"></script>
+	<script src="js/log.js?v=version20"></script>
+	<script src="js/tutorial.js?v=version20"></script>
+	<script src="js/doorbell.js?v=version20"></script>
+	<script src="js/responsive.js?v=version20"></script>
+</body>
+</html>
